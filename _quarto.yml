@@ -1,0 +1,24 @@
+project:
+  type: website
+  output-dir: docs
+
+website:
+  title: "UCL Centre for Behavioural Data Science"
+  favicon: "UCL-CBDS-vectorised-cropped.svg"
+  navbar:
+    right:
+      - about.qmd
+      - icon: house
+        href: https://www.ucl.ac.uk/pals/behavioural-data-science
+      - icon: github
+        href: https://github.com/ucl-behavioural-data-science
+      #- icon: twitter
+      #  href: https://twitter.com
+
+format:
+  html:
+    theme: cosmo
+    css: styles.css
+
+editor: source
+

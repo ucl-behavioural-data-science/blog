@@ -1,0 +1,18 @@
+---
+title: "About"
+image: UCL-CBDS-vectorised-cropped.svg
+about:
+  template: jolla
+  links:
+    - icon: twitter
+      text: Twitter
+      href: https://twitter.com
+#    - icon: linkedin
+#      text: LinkedIn
+#      href: https://linkedin.com
+    - icon: github
+      text: Github
+      href: https://github.com/ucl-behavioural-data-science
+---
+
+The [UCL Centre for Behavioural Data Science](https://www.ucl.ac.uk/pals/behavioural-data-science) promotes the effective and responsible use of data science to better understand and predict human behaviour across a wide variety of contexts. This blog is part of that aim.

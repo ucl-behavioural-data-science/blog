@@ -1,0 +1,58 @@
+---
+title: "Infering interaction from (non-)significance"
+author: "Maarten Speekenbrink"
+date: "2024-04-23"
+categories: [common mistakes]
+bibliography: refs.bib
+---
+
+```{r}
+#| echo: false
+#| warning: false
+
+set.seed(12)
+ok <- FALSE
+while(!ok) {
+  a1 <- rnorm(30, mean=5, sd=1)
+  a2 <- a1 + rnorm(30, mean=0, sd = .5)
+  b1 <- rnorm(30, mean=5, sd=1)
+  b2 <- b1 + rnorm(30, mean=0, sd = .5)
+  dat <- data.frame(id = c(1:30, 1:30, 31:60, 31:60), time = rep(c("pre","post"), each=30), drug = rep(c("A","B"), each=60), score = c(a1, a2, b1, b2)) |>
+    dplyr::mutate(time=factor(time, levels=c("pre","post")), drug = factor(drug))
+  if(t.test(a1, a2, paired=TRUE)$p.value <= .01 && mean(a2 - a1) > 0 && mean(b2 - b1) > 0 && t.test(b1, b2, paired=TRUE)$p.value > .10 && afex::aov_4(score ~ drug*time + (1 + time|id), data=dat)$anova_table[3,6] > .05) ok <- TRUE
+}
+```
+
+In a clinical trial, a group of 30 patients is assigned drug A, and another 
+group of 30 patients drug B. 
+Those who take drug A show a significant improvement in symptoms, `r papaja::apa_print(t.test(a2, a1, paired=TRUE))$full_result`. Those
+who take drug B show no significant change in symptoms, `r papaja::apa_print(t.test(b2, b1, paired=TRUE))$full_result`. It is concluded that
+drug A is **more effective** than drug B.
+
+The conclusion above, that the effect of drug A is different to the effect of 
+drug B, may seem persuasive. But it is **wrong**. The claim that an effect differs 
+between two groups refers to an interaction, and evidence for that claim should 
+be based on a direct test of that interaction [@gelman2006difference]. A direct
+test of the interaction provides no evidence of a difference in effect, `r papaja::apa_print(afex::aov_4(score ~ drug*time + (1 + time|id), data=dat))$full_result$drug_time`.
+
+If you look at the data in the figure below, it is reasonably clear that the improvement from pretest to postest is not so different between the drugs, and hence why there is no evidence for an interaction between time and drug. The average difference between the posttest and pretest is small for both drugs, but just large enough to be significant for drug A. For drug B, there is also an improvement on average, but this is not strong enough to be significant. But that the difference is significant in one group, and not the other, is itself no evidence that the difference differs between groups.
+
+```{r}
+#| echo: false
+#| warning: false
+#| fig-cap: "Plot of (simulated) scores by time and drug."
+#| fig-width: 4
+#| fig-height: 3
+
+afex::afex_plot(afex::aov_4(score ~ drug*time + (1 + time|id), data=dat), x = "time", trace="drug") + ggplot2::theme_minimal()
+```
+In 2011, @nieuwenhuis2011erroneous found the error to be very pervasive in 
+neuroscience. Out of 513 articles in top journals, 79 made the error, compared
+to 78 using the correct direct test of the interaction. More recently,  
+@garcia2021reporting show that out of 83 articles claiming evidence for sex 
+differences, only 32 (39%) used the correct procedure of testing an interaction
+directly.
+
+So, beware of claims made from patterns of significance over multiple tests.
+They could be correct, but there is no way to tell. A claim of an interaction
+should be supported by a direct test of that interaction effect. 

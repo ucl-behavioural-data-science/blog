@@ -1,0 +1,10 @@
+---
+title: "Welcome to our blog"
+author: "Maarten Speekenbrink"
+date: "2024-04-19"
+categories: [news]
+---
+
+![](UCL-CBDS-vectorised-cropped.svg)
+
+Welcome to the blog of the UCL Centre for Behavioural Data Science!
