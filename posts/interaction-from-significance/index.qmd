@@ -48,8 +48,7 @@ afex::afex_plot(afex::aov_4(score ~ drug*time + (1 + time|id), data=dat), x = "t
 ```
 In 2011, @nieuwenhuis2011erroneous found the error to be very pervasive in 
 neuroscience. Out of 513 articles in top journals, 79 made the error, compared
-to 78 using the correct direct test of the interaction. More recently,  
-@garcia2021reporting show that out of 83 articles claiming evidence for sex 
+to 78 using the correct direct test of the interaction. More recently, @garcia2021reporting show that out of 83 articles claiming evidence for sex 
 differences, only 32 (39%) used the correct procedure of testing an interaction
 directly.
 

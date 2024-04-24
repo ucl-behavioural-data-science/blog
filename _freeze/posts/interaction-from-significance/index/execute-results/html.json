@@ -1,0 +1,16 @@
+{
+  "hash": "60af6a0c3655b4fb6e9885563e83a5b1",
+  "result": {
+    "markdown": "---\ntitle: \"Infering interaction from (non-)significance\"\nauthor: \"Maarten Speekenbrink\"\ndate: \"2024-04-23\"\ncategories: [common mistakes]\nbibliography: refs.bib\n---\n\n::: {.cell}\n\n:::\n\n\nIn a clinical trial, a group of 30 patients is assigned drug A, and another \ngroup of 30 patients drug B. \nThose who take drug A show a significant improvement in symptoms, $M_D = 0.23$, 95\\% CI $[0.06, 0.40]$, $t(29) = 2.78$, $p = .009$. Those\nwho take drug B show no significant change in symptoms, $M_D = 0.04$, 95\\% CI $[-0.12, 0.20]$, $t(29) = 0.50$, $p = .618$. It is concluded that\ndrug A is **more effective** than drug B.\n\nThe conclusion above, that the effect of drug A is different to the effect of \ndrug B, may seem persuasive. But it is **wrong**. The claim that an effect differs \nbetween two groups refers to an interaction, and evidence for that claim should \nbe based on a direct test of that interaction [@gelman2006difference]. A direct\ntest of the interaction provides no evidence of a difference in effect, $F(1, 58) = 2.72$, $p = .105$, $\\hat{\\eta}^2_G = .002$, 90\\% CI $[.000, .053]$.\n\nIf you look at the data in the figure below, it is reasonably clear that the improvement from pretest to postest is not so different between the drugs, and hence why there is no evidence for an interaction between time and drug. The average difference between the posttest and pretest is small for both drugs, but just large enough to be significant for drug A. For drug B, there is also an improvement on average, but this is not strong enough to be significant. But that the difference is significant in one group, and not the other, is itself no evidence that the difference differs between groups.\n\n\n::: {.cell}\n::: {.cell-output-display}\n![Plot of (simulated) scores by time and drug.](index_files/figure-html/unnamed-chunk-2-1.png){width=384}\n:::\n:::\n\nIn 2011, @nieuwenhuis2011erroneous found the error to be very pervasive in \nneuroscience. Out of 513 articles in top journals, 79 made the error, compared\nto 78 using the correct direct test of the interaction. More recently, @garcia2021reporting show that out of 83 articles claiming evidence for sex \ndifferences, only 32 (39%) used the correct procedure of testing an interaction\ndirectly.\n\nSo, beware of claims made from patterns of significance over multiple tests.\nThey could be correct, but there is no way to tell. A claim of an interaction\nshould be supported by a direct test of that interaction effect. ",
+    "supporting": [
+      "index_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}
